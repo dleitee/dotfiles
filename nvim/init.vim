@@ -95,14 +95,6 @@ set softtabstop=2
 " Remove trailling spaces
 autocmd BufWritePre * %s/\s\+$//e
 
-" Autoformat Settings
-augroup autoformat_settings
-	autocmd FileType bzl AutoFormatBuffer buildifier
-	autocmd FileType c,cpp,proto AutoFormatBuffer clang-format
-	autocmd FileType gn AutoFormatBuffer gn
-	autocmd FileType python AutoFormatBuffer autopep8
-augroup END
-
 " Prettier Settings
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
@@ -117,7 +109,7 @@ set foldnestmax=10
 set foldmethod=indent
 
 " space open/closes folds
-" nnoremap <space> za
+nnoremap = za
 
 
 """""""""""""""""""""""""""""""""""""
@@ -127,9 +119,6 @@ let g:jsx_ext_required = 0
 let g:user_emmet_jsx = 1
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1
-
-nnoremap <leader>rf :JsAnonFnToArrowFn<cr>
-
 
 
 """""""""""""""""""""""""""""""""""""
@@ -149,6 +138,9 @@ let g:EasyClipUsePasteToggleDefaults = 0
 
 nmap <c-f> <plug>EasyClipSwapPasteForward
 nmap <c-d> <plug>EasyClipSwapPasteBackwards
+nmap <silent> gs <plug>SubstituteOverMotionMap
+nmap gss <plug>SubstituteLine
+xmap gs <plug>XEasyClipPaste
 
 set pastetoggle=<F2>
 
@@ -210,20 +202,6 @@ set updatetime=250
 let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 
-"
-"""""""""""""""""""""""""""""""""""""
-" => ClojureScript Config
-"""""""""""""""""""""""""""""""""""""
-let g:tslime_always_current_session = 1
-let g:tslime_always_current_window = 1
-
-vmap <C-c><C-c> <Plug>SendSelectionToTmux
-nmap <C-c><C-c> <Plug>NormalModeSendToTmux
-nmap <C-c>r <Plug>SetTmuxVars
-
-" Evaluate Clojure buffers on load
-autocmd BufRead *.clj try | silent! Require | catch /^Fireplace/ | endtry
-
 
 """""""""""""""""""""""""""""""""""""
 " => General bindings
@@ -270,23 +248,3 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-z> :ZoomToggle<CR>
-
-"""""""""""""""""""""""""""""""""""""
-" => Snippets
-"""""""""""""""""""""""""""""""""""""
-
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
