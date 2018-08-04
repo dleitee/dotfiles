@@ -18,7 +18,6 @@ Plug 'anyakichi/vim-surround'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-fugitive'
-
-" Snippets
+Plug 'terryma/vim-multiple-cursors'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
