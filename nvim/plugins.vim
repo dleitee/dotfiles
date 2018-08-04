@@ -13,6 +13,7 @@ Plug 'joom/vim-commentary'
 Plug 'svermeulen/vim-easyclip'
 Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
+Plug 'othree/html5.vim'
 Plug 'anyakichi/vim-surround'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'wakatime/vim-wakatime'
