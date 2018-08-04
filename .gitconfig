@@ -1,0 +1,14 @@
+[alias]
+	o = !vim `~/.git-scripts/git-open.sh`
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	up = "!git remote update -p; git merge --ff-only @{u}"
+	rm-merged = "!f() { git branch --merged | grep -v -e "dev" | xargs -n 1 git branch -d; }; f"
+	fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
+[user]
+	name = Daniel Leite de Oliveira
+	email = dleitee@gmail.com
+[core]
+	excludesfile = /Users/danieloliveira/.gitignore_global

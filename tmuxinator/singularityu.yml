@@ -1,0 +1,20 @@
+# /Users/danieloliveira/.config/tmuxinator/singularityu.yml
+
+name: singularityu
+root: ~/_dev/singularity-directory-webapp
+
+startup_window: editor
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Runs after everything. Use it to attach to tmux with custom options etc.
+# post: tmux -CC attach -t singularityu
+
+windows:
+  - editor: vim
+  - server:
+      layout: main-vertical
+      panes:
+        - yarn dev
+        - git st
