@@ -1,0 +1,7 @@
+--color
+--ignore-dir=dist
+--ignore-dir=.next
+--ignore-dir=node_modules
+--ignore-dir=build
+--type-add=lock:ext:lock
+--type=nolock

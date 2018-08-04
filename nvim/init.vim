@@ -15,6 +15,7 @@ let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#fugitiveline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 
 """""""""""""""""""""""""""""""""""""
 " => General Settings
@@ -54,6 +55,9 @@ let g:indentLine_leadingSpaceChar = '·'
 set viminfo="20,<1000,s1000"
 let g:gitgutter_max_signs=10000
 
+let g:ack_default_options = " -s -H --nopager --nocolor --column"
+
+let g:deoplete#enable_at_startup = 1
 
 """""""""""""""""""""""""""""""""""""
 " => Shortcuts
@@ -231,7 +235,7 @@ nnoremap <leader>sv :source $VIMRC<CR>
 nnoremap <leader>sz :source $ZSHRC<CR>
 nnoremap <leader>sp :source ~/.config/nvim/plugins.vim<CR>
 
-nnoremap <leader>a :Ag
+nnoremap <leader>a :Ack!<Space>
 :command! WQ wq
 :command! Wq wq
 :command! W w
