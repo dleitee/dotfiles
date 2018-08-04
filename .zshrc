@@ -65,18 +65,10 @@ zstyle ':completion:*:*' ignored-patterns '*ORIG_HEAD'
 alias g="git"
 alias en="trans en:pt"
 alias pt="trans pt-BR:en"
-alias runserver="python manage.py runserver"
-alias pyshell="python manage.py shell_plus"
-alias gsu="cd ~/_dev/singularity-directory-webapp/"
-alias gob="cd ~/_dev/oceanner-backend/"
-alias gof="cd ~/_dev/oceanner-frontend/"
-alias gmf="cd ~/_dev/mediconahora"
-alias gmb="cd ~/_dev/mediconahora-backend"
-alias rswp="find . -type f -name \".*.swp\" -exec rm -f {} \;"
+alias rs="find . -type f -name \".*.swp\" -exec rm -f {} \;"
 alias vim="nvim"
 alias :q="exit"
-alias start-su="tmux source-file ~/workspaces/su.sh"
-
+alias did="vim +'normal Go' +'r!date' ~/did.txt"
 
 # added by travis gem
 [ -f /Users/danieloliveira/.travis/travis.sh ] && source /Users/danieloliveira/.travis/travis.sh
