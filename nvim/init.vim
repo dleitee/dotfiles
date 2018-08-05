@@ -8,8 +8,11 @@ source ~/.config/nvim/plugins.vim
 """""""""""""""""""""""""""""""""""""
 syntax enable
 
+set termguicolors
+let g:gruvbox_italic=1
 colorscheme gruvbox
 set background=dark
+let g:gruvbox_contrast_dark='hard'
 let g:airline_theme='gruvbox'
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#fugitiveline#enabled = 1
@@ -188,8 +191,8 @@ let g:ctrlp_switch_buffer = 'et'
 """""""""""""""""""""""""""""""""""""
 " => NERDTree Settings
 """""""""""""""""""""""""""""""""""""
-map <C-n> :NERDTreeToggle<CR>
-nmap <leader>n :NERDTreeFind<CR>
+map <C-b> :NERDTreeToggle<CR>
+nmap <leader>b :NERDTreeFind<CR>
 let g:NERDTreeIgnore=['\~$', 'vendor', 'node_modules', '.git', 'dist', '.next']
 let NERDTreeShowHidden=1
 
