@@ -80,3 +80,4 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # . /Users/danieloliveira/Library/Python/2.7/lib/python/site-packages/powerline/bindings/zsh/powerline.zsh
 
 antigen apply
+source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette_osx.sh
