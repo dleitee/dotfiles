@@ -39,6 +39,7 @@ git
 hg
 cmd_exec_time)
 
+BULLETTRAIN_STATUS_FG='yellow'
 BULLETTRAIN_VIRTUALENV_BG='yellow'
 BULLETTRAIN_VIRTUALENV_FG='black'
 

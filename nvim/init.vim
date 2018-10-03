@@ -6,19 +6,22 @@ source ~/.config/nvim/plugins.vim
 """""""""""""""""""""""""""""""""""""
 " => Schema and colors
 """""""""""""""""""""""""""""""""""""
-syntax enable
+syntax on
 
 set termguicolors
-let g:gruvbox_italic=1
-colorscheme gruvbox
-set background=dark
-let g:gruvbox_contrast_dark='hard'
-let g:airline_theme='gruvbox'
+colorscheme onedark
+let g:onedark_terminal_italics=1
+let g:onedark_termcolors=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:airline_theme='onedark'
 let g:airline#extensions#obsession#enabled = 1
 let g:airline#extensions#fugitiveline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#ale#enabled = 1
+let g:ale_cursor_detail = 0
+nmap <silent> <C-up> <Plug>(ale_previous_wrap)
+nmap <silent> <C-down> <Plug>(ale_next_wrap)
 
 """""""""""""""""""""""""""""""""""""
 " => General Settings
@@ -69,13 +72,6 @@ nnoremap <C-a> ggVG
 
 
 """""""""""""""""""""""""""""""""""""
-" => JSON Environment
-"""""""""""""""""""""""""""""""""""""
-au BufRead,BufNewFile *.json set filetype=json
-let g:vim_json_syntax_conceal = 0
-
-
-"""""""""""""""""""""""""""""""""""""
 " => Code format
 """""""""""""""""""""""""""""""""""""
 set relativenumber
@@ -83,7 +79,9 @@ set number
 set showcmd
 set cursorline
 set showmatch
-
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 filetype plugin indent on
 
 set ai
@@ -98,10 +96,18 @@ set softtabstop=2
 " Remove trailling spaces
 autocmd BufWritePre * %s/\s\+$//e
 
-" Prettier Settings
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.json,*.css,*.scss,*.less,*.graphql PrettierAsync
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
+let g:neoformat_enabled_python = ['autopep8']
+let g:neoformat_enabled_javascript = ['prettier']
+let g:neoformat_enabled_css = ['prettier']
+let g:neoformat_enabled_scss = ['prettier']
+let g:neoformat_enabled_json = ['prettier']
+let g:neoformat_enabled_markdown = ['prettier']
+let g:neoformat_enabled_html = ['html-beautify']
 
 """""""""""""""""""""""""""""""""""""
 " => Folding Settings
@@ -193,7 +199,7 @@ let g:ctrlp_switch_buffer = 'et'
 """""""""""""""""""""""""""""""""""""
 map <C-b> :NERDTreeToggle<CR>
 nmap <leader>b :NERDTreeFind<CR>
-let g:NERDTreeIgnore=['\~$', 'vendor', 'node_modules', '.git', 'dist', '.next']
+let g:NERDTreeIgnore=['\~$', 'node_modules', '.git', 'dist', '.next']
 let NERDTreeShowHidden=1
 
 
@@ -230,7 +236,7 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 """""""""""""""""""""""""""""""""""""
 " => Aliases
 """""""""""""""""""""""""""""""""""""
-ab target target="_blank" rel="noopener noreferrer"
+ab target= target="_blank" rel="noopener noreferrer"
 
 
 """""""""""""""""""""""""""""""""""""
@@ -250,3 +256,9 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-z> :ZoomToggle<CR>
+
+"
+"""""""""""""""""""""""""""""""""""""
+" => GIT
+"""""""""""""""""""""""""""""""""""""
+autocmd Filetype gitcommit setlocal spell textwidth=72
