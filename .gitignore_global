@@ -13,3 +13,5 @@ jsconfig.json
 *.swp
 git-open.sh
 Session.vim
+ctags
+*.log

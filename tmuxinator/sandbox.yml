@@ -1,0 +1,7 @@
+# /Users/danieloliveira/.config/tmuxinator/sandbox.yml
+
+name: sandbox
+root: ~/_sandbox/
+
+windows:
+  - editor: vim

@@ -1,0 +1,11 @@
+# /Users/danieloliveira/.config/tmuxinator/crates.yml
+
+name: crates
+root: ~/_opensource/crates/
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - git st

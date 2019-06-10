@@ -1,0 +1,11 @@
+# /Users/danieloliveira/.config/tmuxinator/fetches.yml
+
+name: fetches
+root: ~/_opensource/fetches/
+
+windows:
+  - editor:
+      layout: main-vertical
+      panes:
+        - vim
+        - git st

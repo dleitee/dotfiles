@@ -1,12 +1,14 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'joshdick/onedark.vim'
+Plug 'mrk21/yaml-vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'w0rp/ale'
 Plug 'tpope/vim-repeat'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'mileszs/ack.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'sjl/gundo.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'bling/vim-airline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'joom/vim-commentary'
 Plug 'svermeulen/vim-easyclip'
@@ -17,6 +19,7 @@ Plug 'anyakichi/vim-surround'
 Plug 'sbdchd/neoformat'
 Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-fugitive'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'justinmk/vim-sneak'
 call plug#end()

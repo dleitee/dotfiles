@@ -8,17 +8,15 @@ source ~/.config/nvim/plugins.vim
 """""""""""""""""""""""""""""""""""""
 syntax on
 
+colors dracula
 set termguicolors
 colorscheme onedark
+set background=dark
+set mouse=a
 let g:onedark_terminal_italics=1
 let g:onedark_termcolors=256
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:airline_theme='onedark'
-let g:airline#extensions#obsession#enabled = 1
-let g:airline#extensions#fugitiveline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline#extensions#ale#enabled = 1
+
 let g:ale_cursor_detail = 0
 nmap <silent> <C-up> <Plug>(ale_previous_wrap)
 nmap <silent> <C-down> <Plug>(ale_next_wrap)
@@ -28,6 +26,7 @@ nmap <silent> <C-down> <Plug>(ale_next_wrap)
 """""""""""""""""""""""""""""""""""""
 let mapleader=","
 
+set tags+=ctags
 set wildmenu
 set lazyredraw
 
@@ -52,6 +51,9 @@ nnoremap k gk
 nnoremap B ^
 nnoremap E $
 
+" exit from Terminal mode using ESC
+:tnoremap <Esc> <C-\><C-n>
+
 set invlist
 set list
 set listchars=tab:¦\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
@@ -63,14 +65,33 @@ let g:gitgutter_max_signs=10000
 
 let g:ack_default_options = " -s -H --nopager --nocolor --column"
 
+" autocomplete
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_delay = 100
 
+" use tab instdead
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#mappings#manual_complete()
+function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+" completion delay
+call deoplete#custom#option({
+\ 'auto_complete_delay': 10,
+\ })
+
+"
 """""""""""""""""""""""""""""""""""""
 " => Shortcuts
 """""""""""""""""""""""""""""""""""""
 nnoremap <C-a> ggVG
+nnoremap gm m
 
-
+let g:Lf_CommandMap = {'<C-K>': ['<Up>'], '<C-J>': ['<Down>']}
+let g:Lf_ShortcutF = '<C-p>'
 """""""""""""""""""""""""""""""""""""
 " => Code format
 """""""""""""""""""""""""""""""""""""
@@ -79,6 +100,7 @@ set number
 set showcmd
 set cursorline
 set showmatch
+set colorcolumn=100
 let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
 let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
@@ -92,6 +114,12 @@ set tabstop=2
 set expandtab
 set shiftwidth=2
 set softtabstop=2
+
+
+" backup
+set noswapfile
+set nowritebackup
+set nobackup
 
 " Remove trailling spaces
 autocmd BufWritePre * %s/\s\+$//e
@@ -137,7 +165,11 @@ let g:vim_markdown_conceal = 0
 
 au BufRead,BufNewFile *.ejs set filetype=html
 au BufRead,BufNewFile *.scss set filetype=css
+au BufRead,BufNewFile .babelrc set filetype=json
 
+" add yaml stuffs
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 """""""""""""""""""""""""""""""""""""
 " => Clipboard Settings
 """""""""""""""""""""""""""""""""""""
@@ -181,25 +213,28 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 
 
 """""""""""""""""""""""""""""""""""""
+" => Buffer Settings
+"""""""""""""""""""""""""""""""""""""
+"
+" Move to the next buffer
+nmap <leader>l :bnext<CR>
+
+" Move to the previous buffer
+nmap <leader>h :bprevious<CR>
+
+
+"""""""""""""""""""""""""""""""""""""
 " => gUndo Settings
 """""""""""""""""""""""""""""""""""""
 nnoremap <leader>u :GundoToggle<CR>
 
 
 """""""""""""""""""""""""""""""""""""
-" => CTRL-P Settings
-"""""""""""""""""""""""""""""""""""""
-let g:ctrlp_user_command = 'rg --files %s'
-let g:ctrlp_use_caching = 0
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'et'
-
-"""""""""""""""""""""""""""""""""""""
 " => NERDTree Settings
 """""""""""""""""""""""""""""""""""""
 map <C-b> :NERDTreeToggle<CR>
 nmap <leader>b :NERDTreeFind<CR>
-let g:NERDTreeIgnore=['\~$', 'node_modules', '.git', 'dist', '.next']
+let g:NERDTreeIgnore=['\~$', 'node_modules', '.git', 'dist', '\.next']
 let NERDTreeShowHidden=1
 
 
@@ -232,7 +267,6 @@ nnoremap <leader>a :Ack!<Space>
 " replace all occurrences of word
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
-
 """""""""""""""""""""""""""""""""""""
 " => Aliases
 """""""""""""""""""""""""""""""""""""
@@ -262,3 +296,42 @@ nnoremap <silent> <C-z> :ZoomToggle<CR>
 " => GIT
 """""""""""""""""""""""""""""""""""""
 autocmd Filetype gitcommit setlocal spell textwidth=72
+
+
+" neosnippet
+""" neosnippet settings
+" Plugin key-mappings.
+imap <C-e>     <Plug>(neosnippet_expand_or_jump)
+smap <C-e>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-e>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
+let g:neosnippet#disable_runtime_snippets = {
+\   '_' : 1,
+\ }
+
+
+let g:sneak#label = 1
+nnoremap <silent> s :<C-U>call sneak#wrap('',           3, 0, 2, 1)<CR>
+nnoremap <silent> S :<C-U>call sneak#wrap('',           3, 1, 2, 1)<CR>
+xnoremap <silent> s :<C-U>call sneak#wrap(visualmode(), 3, 0, 2, 1)<CR>
+xnoremap <silent> S :<C-U>call sneak#wrap(visualmode(), 3, 1, 2, 1)<CR>
+onoremap <silent> s :<C-U>call sneak#wrap(v:operator,   3, 0, 2, 1)<CR>
+onoremap <silent> S :<C-U>call sneak#wrap(v:operator,   3, 1, 2, 1)<CR>
+
+
+" Automatically replaces
+

@@ -9,6 +9,21 @@
 	up = "!git remote update -p; git merge --ff-only @{u}"
 	rm-merged = "!f() { git branch --merged | grep -v -e "dev" | xargs -n 1 git branch -d; }; f"
 	fixup = "!f() { TARGET=$(git rev-parse "$1"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
+  fs = flow feature start
+  ff = flow feature finish
+  f = flow feature
+  fpublish = flow feature publish
+  fpull = flow feature pull
+  rs = flow release start
+  rf = flow release finish
+  r = flow release
+  rpublish = flow release publish
+  rpull = flow release pull
+  hs = flow hotfix start
+  hf = flow hotfix finish
+  hpublish = flow hotfix publish
+  hpull = flow hotfix pull
+  h = flow hotfix
 [user]
 	name = Daniel Leite de Oliveira
 	email = dleitee@gmail.com
@@ -16,3 +31,7 @@
 	excludesfile = /Users/danieloliveira/.gitignore_global
 [rebase]
 	autosquash = true
+[push]
+	default = current
+[pull]
+	default = current
