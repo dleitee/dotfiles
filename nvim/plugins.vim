@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'joshdick/onedark.vim'
 Plug 'mrk21/yaml-vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
@@ -17,7 +18,6 @@ Plug 'sheerun/vim-polyglot'
 Plug 'othree/html5.vim'
 Plug 'anyakichi/vim-surround'
 Plug 'sbdchd/neoformat'
-Plug 'wakatime/vim-wakatime'
 Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'jiangmiao/auto-pairs'
